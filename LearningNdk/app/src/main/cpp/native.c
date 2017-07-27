@@ -5,8 +5,10 @@
 #include <jni.h>
 #include <string.h>
 #include <android/log.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-#define DEBUG_TAG "NDK_LearningNDK"
+#define DEBUG_TAG "NDK_native"
 
 void Java_ru_popov_bodya_learningndk_MainActivity_helloLog(JNIEnv * env, jobject this, jstring logThis)
 {
@@ -17,4 +19,31 @@ void Java_ru_popov_bodya_learningndk_MainActivity_helloLog(JNIEnv * env, jobject
 
     (*env)->ReleaseStringUTFChars(env, logThis, szLogThis);
 }
+
+
+jstring Java_ru_popov_bodya_learningndk_MainActivity_evaluateRandomNumber(JNIEnv * env, jobject this)
+{
+    char *szFormat = "Random number is: %i";
+    char *szResult;
+
+    int n = 100;
+
+    jlong sum = rand() % (n-1) + 1;
+
+    // malloc room for the resulting string
+
+    szResult = malloc(sizeof(szFormat) + 20);
+
+    // standard sprintf
+    sprintf(szResult, szFormat, sum);
+
+    // get an object string
+    jstring result = (*env)->NewStringUTF(env, szResult);
+
+    // cleanup
+    free(szResult);
+
+    return result;
+}
+
 

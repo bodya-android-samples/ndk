@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">LearningNdk</string>
+    <string name="log">log</string>
+</resources>

@@ -11,31 +11,44 @@ public class MainActivity extends AppCompatActivity {
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("native-lib");
-
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Example of a call to a native method
-        final TextView tv = (TextView) findViewById(R.id.sample_text);
-        tv.setText(stringFromJNI());
+        final TextView sampleTextView = (TextView) findViewById(R.id.sample_text);
+        sampleTextView.setText(stringFromJNI());
 
-        Button button = (Button) findViewById(R.id.log_button);
-        button.setOnClickListener(new View.OnClickListener() {
+        final TextView evaluatedTextView = (TextView) findViewById(R.id.evaluated_text);
+        evaluatedTextView.setText(getString(R.string.evaluated_value_text, 0));
+
+        Button logButton = (Button) findViewById(R.id.log_button);
+        logButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helloLog(tv.getText().toString());
+                helloLog(sampleTextView.getText().toString());
             }
         });
+
+        Button evaluateButton = (Button) findViewById(R.id.random_button);
+        evaluateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String result = evaluateRandomNumber();
+                evaluatedTextView.setText(result);
+            }
+        });
+
+
     }
 
     /**
-     * A native method that is implemented by the 'native-lib' native library,
-     * which is packaged with this application.
+     * native methods that are implemented
      */
-    public native String stringFromJNI();
+    private native String evaluateRandomNumber();
+    private native String stringFromJNI();
     private native void helloLog(String logThis);
 }

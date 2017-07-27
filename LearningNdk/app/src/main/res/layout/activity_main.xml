@@ -11,13 +11,28 @@
         android:id="@+id/sample_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:text="Hello World!" />
 
     <Button
         android:id="@+id/log_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/log"
-        />
+        android:layout_marginTop="@dimen/top_margin"
+        android:text="@string/log" />
+
+    <Button
+        android:id="@+id/random_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/top_margin"
+        android:text="@string/random" />
+
+    <TextView
+        android:id="@+id/evaluated_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/top_margin"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
 </LinearLayout>

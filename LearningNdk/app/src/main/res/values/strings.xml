@@ -2,5 +2,7 @@
     <string name="app_name">LearningNdk</string>
     <string name="log">log</string>
     <string name="random">random</string>
-    <string name="evaluated_value_text">Random number is: %d</string>
+    <string name="evaluated_random_value_text">Random number is: %d</string>
+    <string name="evaluated_max_value">Max value of number and random is: %d</string>
+    <string name="max_of_random_and_50">Max of Random and 50</string>
 </resources>

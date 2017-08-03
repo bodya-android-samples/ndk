@@ -7,13 +7,18 @@
 #include <android/log.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #define DEBUG_TAG "NDK_native"
 
-void Java_ru_popov_bodya_learningndk_MainActivity_helloLog(JNIEnv * env, jobject this, jstring logThis)
-{
+int theMaxOfTheTwo(int first, int second) {
+    return first > second ? first : second;
+}
+
+void
+Java_ru_popov_bodya_learningndk_MainActivity_helloLog(JNIEnv *env, jobject this, jstring logThis) {
     jboolean isCopy;
-    const char * szLogThis = (*env)->GetStringUTFChars(env, logThis, &isCopy);
+    const char *szLogThis = (*env)->GetStringUTFChars(env, logThis, &isCopy);
 
     __android_log_print(ANDROID_LOG_DEBUG, DEBUG_TAG, "NDK:LC: [%s]", szLogThis);
 
@@ -21,17 +26,16 @@ void Java_ru_popov_bodya_learningndk_MainActivity_helloLog(JNIEnv * env, jobject
 }
 
 
-jstring Java_ru_popov_bodya_learningndk_MainActivity_evaluateRandomNumber(JNIEnv * env, jobject this)
-{
+jstring
+Java_ru_popov_bodya_learningndk_MainActivity_evaluateRandomNumberInText(JNIEnv *env, jobject this) {
+
     char *szFormat = "Random number is: %i";
     char *szResult;
-
     int n = 100;
 
-    jlong sum = rand() % (n-1) + 1;
+    jlong sum = rand() % (n - 1) + 1;
 
-    // malloc room for the resulting string
-
+    // malloc space for the resulting string
     szResult = malloc(sizeof(szFormat) + 20);
 
     // standard sprintf
@@ -42,8 +46,25 @@ jstring Java_ru_popov_bodya_learningndk_MainActivity_evaluateRandomNumber(JNIEnv
 
     // cleanup
     free(szResult);
-
     return result;
 }
+
+jlong
+Java_ru_popov_bodya_learningndk_MainActivity_evaluateRandomNumber(JNIEnv *env, jobject this) {
+    int n = 100;
+    jlong random = rand() % (n - 1) + 1;
+    return random;
+}
+
+jint Java_ru_popov_bodya_learningndk_MainActivity_evaluateMaxValue(JNIEnv *env, jobject this,
+                                                                   jint first, jint second) {
+    return theMaxOfTheTwo(first, second);
+}
+
+
+
+
+
+
 
 

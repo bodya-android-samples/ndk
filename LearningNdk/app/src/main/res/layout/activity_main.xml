@@ -11,8 +11,8 @@
         android:id="@+id/sample_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-        android:text="Hello World!" />
+        android:text="Hello World!"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
     <Button
         android:id="@+id/log_button"
@@ -30,6 +30,21 @@
 
     <TextView
         android:id="@+id/evaluated_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/top_margin"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+
+    <Button
+        android:id="@+id/find_max_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/top_margin"
+        android:text="@string/max_of_random_and_50" />
+
+    <TextView
+        android:id="@+id/max_value_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/top_margin"

@@ -8,11 +8,16 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int CONST = 50;
+
+    private int mRandomValue;
+
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("native-lib");
     }
 
+    // region Activity lifecycle
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +27,11 @@ public class MainActivity extends AppCompatActivity {
         final TextView sampleTextView = (TextView) findViewById(R.id.sample_text);
         sampleTextView.setText(stringFromJNI());
 
-        final TextView evaluatedTextView = (TextView) findViewById(R.id.evaluated_text);
-        evaluatedTextView.setText(getString(R.string.evaluated_value_text, 0));
+        final TextView evaluatedRandomTextView = (TextView) findViewById(R.id.evaluated_text);
+        evaluatedRandomTextView.setText(getString(R.string.evaluated_random_value_text, 0));
+
+        final TextView evaluatedMaxTextView = (TextView) findViewById(R.id.max_value_text);
+        evaluatedMaxTextView.setText(getString(R.string.evaluated_max_value, 0));
 
         Button logButton = (Button) findViewById(R.id.log_button);
         logButton.setOnClickListener(new View.OnClickListener() {
@@ -33,22 +41,38 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button evaluateButton = (Button) findViewById(R.id.random_button);
-        evaluateButton.setOnClickListener(new View.OnClickListener() {
+        Button evaluateRandomButton = (Button) findViewById(R.id.random_button);
+        evaluateRandomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String result = evaluateRandomNumber();
-                evaluatedTextView.setText(result);
+                mRandomValue = evaluateRandomNumber();
+                evaluatedRandomTextView.setText(getString(R.string.evaluated_random_value_text, mRandomValue));
             }
         });
 
-
+        Button evaluateMaxValueButton = (Button) findViewById(R.id.find_max_button);
+        evaluateMaxValueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int maxValue = evaluateMaxValue(mRandomValue, CONST);
+                evaluatedMaxTextView.setText(getString(R.string.evaluated_max_value, maxValue));
+            }
+        });
     }
+
+    // endregion
 
     /**
      * native methods that are implemented
      */
-    private native String evaluateRandomNumber();
+
+    private native String evaluateRandomNumberInText();
+
     private native String stringFromJNI();
+
+    private native int evaluateMaxValue(int first, int second);
+
+    private native int evaluateRandomNumber();
+
     private native void helloLog(String logThis);
 }

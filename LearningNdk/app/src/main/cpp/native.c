@@ -68,3 +68,5 @@ jint Java_ru_popov_bodya_learningndk_MainActivity_evaluateMaxValue(JNIEnv *env, 
 
 
 
+
+

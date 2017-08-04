@@ -6,11 +6,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int CONST = 50;
 
     private int mRandomValue;
+    private List<Integer> mRandomList;
 
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -23,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mRandomList = new ArrayList<>();
 
         final TextView sampleTextView = (TextView) findViewById(R.id.sample_text);
         sampleTextView.setText(stringFromJNI());
@@ -46,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mRandomValue = evaluateRandomNumber();
+                mRandomList.add(mRandomValue);
                 evaluatedRandomTextView.setText(getString(R.string.evaluated_random_value_text, mRandomValue));
             }
         });

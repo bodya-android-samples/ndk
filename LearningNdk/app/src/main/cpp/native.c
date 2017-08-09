@@ -3,11 +3,9 @@
 //
 
 #include <jni.h>
-#include <string.h>
 #include <android/log.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
 #define DEBUG_TAG "NDK_native"
 
